@@ -3,16 +3,16 @@ import string
 import random
 import time
 
-from difflib import SequenceMatcher
+
 
 
 allchars = string.ascii_uppercase + string.ascii_lowercase + string.punctuation + string.digits + " "
 
 correct_word = input("Please provide a phrase: ")
 # correct_word = "Hello!"
+
 def word_generator(size=len(correct_word), chars=allchars):
     return "".join(random.choice(chars) for _ in range(size))
-
 
 class Agent(object):
 
@@ -22,14 +22,11 @@ class Agent(object):
 
     @staticmethod
     def mate(agent1, agent2, crossover_prob=0.5):
-        # if len(agent1.guess) != len(agent2.guess):
-        #     print("agents have mismatched guesses; unable to mate")
-        #     return
 
         outguess = ''
         for i in range(min(len(agent1.guess), len(agent2.guess))):
 
-            if random.uniform(0,1) < 0.5:
+            if random.uniform(0,1) < crossover_prob:
                 outguess += agent1.guess[i]
             else:
                 outguess += agent2.guess[i]
